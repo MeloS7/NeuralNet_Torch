@@ -1,0 +1,18 @@
+train:
+  device: cuda:0
+  lr: 3e-2
+  num_epochs: 1
+  batch_size: 8
+
+model:
+  model_name: "bigscience/bloomz-560m"
+  tokenizer_name: "bigscience/bloomz-560m"
+  max_length: 64
+
+peft:
+  num_virtual_tokens: 8
+  prompt_tuning_init_text: "Classify if the sentence is positive or negative:"
+
+dataset:
+  dataset_name: "glue"
+  task_name: "sst2"
