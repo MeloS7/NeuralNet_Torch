@@ -171,4 +171,5 @@ class SST2Dataset:
             batch_size=self.eval_batch_size,
             pin_memory=True,
         )
+        print(f"Number of Evaluating Examples: {len(test_dataset)}")
         return test_dataloader

@@ -49,7 +49,7 @@ def main():
     train_ratio = config["dataset"]["train_ratio"]
 
     # Other parameters
-    checkpoint_name = f"{dataset_name}_{model_name}_{task_name}_{num_epochs}".replace(
+    checkpoint_name = f"{dataset_name}_{model_name}_{train_ratio}_{num_epochs}".replace(
         "/", "_"
     )
     model_dir = os.path.join("res", "models")

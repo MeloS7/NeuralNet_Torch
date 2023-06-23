@@ -16,6 +16,7 @@ def evaluate():
     task_name = config["dataset"]["task_name"]
 
     # Model parameters
+    model_name = config["model"]["model_name"]
     tokenizer_name = config["model"]["tokenizer_name"]
     max_length = config["model"]["max_length"]
 
@@ -23,14 +24,18 @@ def evaluate():
     eval_device = config["eval"]["device"]
     eval_batch_size = int(config["eval"]["eval_batch_size"])
     eval_model_path = config["eval"]["eval_model_path"]
+    eval_base = config["eval"]["eval_base"]
 
     # Load dataset
     dataset = load_dataset(dataset_name, task_name)
 
     # Load model
-    config = PeftConfig.from_pretrained(eval_model_path)
-    model = AutoModelForCausalLM.from_pretrained(config.base_model_name_or_path)
-    model = PeftModel.from_pretrained(model, eval_model_path)
+    if eval_base:
+        model = AutoModelForCausalLM.from_pretrained(model_name)
+    else:
+        config = PeftConfig.from_pretrained(eval_model_path)
+        model = AutoModelForCausalLM.from_pretrained(config.base_model_name_or_path)
+        model = PeftModel.from_pretrained(model, eval_model_path)
 
     # Load tokenizer
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)

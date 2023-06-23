@@ -54,7 +54,7 @@ def calculate_percentage(lst):
 def evaluate_function(model, device, test_dataloader, tokenizer):
     model.eval()
     model = model.to(device)
-    
+
     test_preds = []
     labels = []
 
@@ -66,8 +66,9 @@ def evaluate_function(model, device, test_dataloader, tokenizer):
                 input_ids=batch["input_ids"], attention_mask=batch["attention_mask"], max_new_tokens=10, eos_token_id=3
             )
         
-        # print(tokenizer.batch_decode(outputs[:, -2:-1]))
+        # print(tokenizer.batch_decode(outputs))
         # print(tokenizer.batch_decode(batch["labels"]))
+
         test_preds.extend(tokenizer.batch_decode(outputs[:, -2:-1]))
         labels.extend(tokenizer.batch_decode(batch["labels"]))
 
