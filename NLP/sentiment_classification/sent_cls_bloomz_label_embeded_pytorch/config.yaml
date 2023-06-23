@@ -2,7 +2,12 @@ train:
   device: cuda:0
   lr: 3e-2
   num_epochs: 1
-  batch_size: 8
+  train_batch_size: 8
+
+eval:
+  device: "cuda:0"
+  eval_batch_size: 8
+  eval_model_path: "./res/models/glue_bigscience_bloomz-560m_sst2_1"
 
 model:
   model_name: "bigscience/bloomz-560m"
@@ -10,9 +15,11 @@ model:
   max_length: 64
 
 peft:
+  task_type: "CAUSAL_LM"
   num_virtual_tokens: 8
-  prompt_tuning_init_text: "Classify if the sentence is positive or negative:"
+  prompt_init_text: "Classify if the sentence is positive or negative:"
 
 dataset:
   dataset_name: "glue"
   task_name: "sst2"
+  train_ratio: 0.1
