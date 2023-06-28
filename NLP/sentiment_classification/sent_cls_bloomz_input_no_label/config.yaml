@@ -7,7 +7,7 @@ train:
 eval:
   device: "cuda:0"
   eval_batch_size: 8
-  eval_model_path: "./res/models/glue_bigscience_bloomz-560m_0.1_1"
+  eval_model_path: "./res/models/glue_bigscience_bloomz-560m_0.2_1"
   eval_base: False
 
 model:
@@ -23,4 +23,4 @@ peft:
 dataset:
   dataset_name: "glue"
   task_name: "sst2"
-  train_ratio: 0.1
+  train_ratio: 0.2
