@@ -24,11 +24,6 @@ def train_function(model, device, train_dataloader, eval_dataloader, optimizer, 
         total_loss = 0
         for step, batch in enumerate(tqdm(train_dataloader)):
             batch = {k: v.to(device) for k, v in batch.items()}
-            # print(batch["input_ids"])
-            # print(tokenizer.batch_decode(batch["input_ids"]))
-            # print(batch["labels"])
-            # print(batch["attention_mask"])
-            # assert 1==0
             outputs = model(**batch)
             loss = outputs.loss
             total_loss += loss.detach().float()
@@ -51,6 +46,11 @@ def train_function(model, device, train_dataloader, eval_dataloader, optimizer, 
         train_epoch_loss = total_loss / len(train_dataloader)
         train_ppl = torch.exp(train_epoch_loss)
         print(f"{epoch=}: {train_ppl=} {train_epoch_loss=} {eval_ppl=} {eval_epoch_loss=}")
+
+        # test generation
+        # preds, labels = evaluate_function(model, device, eval_dataloader, tokenizer)
+        # accuracy = calculate_percentage(get_metrics(preds, labels))
+        # print(f"Epoch: {epoch} Accuracy: {accuracy}")
     
     # torch.save(model, checkpoints_path)
     model.save_pretrained(checkpoints_path)

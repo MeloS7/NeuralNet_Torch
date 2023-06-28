@@ -7,7 +7,7 @@ train:
 eval:
   device: "cuda:0"
   eval_batch_size: 8
-  eval_model_path: "./res/models/poli_bigscience_bloomz-560m_1_1"
+  eval_model_path: "./res/models/poli_bigscience_bloomz-560m_1_5"
   eval_base: False
 
 model:

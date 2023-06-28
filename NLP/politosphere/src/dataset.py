@@ -169,7 +169,7 @@ class PolitosphereDataset:
 
     def get_test_dataloader(self):
         # dataset = self.create_text_label()
-        dataset = self.test_dataset
+        dataset = self.dataset
         test_dataset = dataset["train"].map(
             self.test_preprocess_function,
             batched=True,
