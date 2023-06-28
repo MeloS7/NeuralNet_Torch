@@ -4,7 +4,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel, PeftConfig
 
 from src.utils import load_config, evaluate_function, get_metrics, calculate_percentage
-from src.dataset import SST2Dataset
+from src.dataset import PolitosphereDataset
 
 
 def evaluate():
@@ -12,8 +12,9 @@ def evaluate():
     config = load_config("config.yaml")
 
     # Dataset parameters
-    dataset_name = config["dataset"]["dataset_name"]
-    task_name = config["dataset"]["task_name"]
+    dataset_path = config["dataset"]["dataset_path"]
+    eval_dataset_path = config["dataset"]["eval_dataset_path"]
+    test_dataset_path = config["dataset"]["test_dataset_path"]
 
     # Model parameters
     model_name = config["model"]["model_name"]
@@ -27,7 +28,9 @@ def evaluate():
     eval_base = config["eval"]["eval_base"]
 
     # Load dataset
-    dataset = load_dataset(dataset_name, task_name)
+    dataset = load_dataset("json", data_files=dataset_path)
+    eval_dataset = load_dataset("json", data_files=eval_dataset_path)
+    test_dataset = load_dataset("json", data_files=test_dataset_path)
 
     # Load model
     if eval_base:
@@ -44,8 +47,8 @@ def evaluate():
 
     # Preprocess dataset
     print("========Preprocessing dataset========")
-    sst2dataset = SST2Dataset(
-        tokenizer, max_length, dataset, task_name, eval_batch_size=eval_batch_size
+    sst2dataset = PolitosphereDataset(
+        tokenizer, max_length, dataset, eval_dataset, test_dataset, eval_batch_size=eval_batch_size
     )
 
     # Load test dataloader

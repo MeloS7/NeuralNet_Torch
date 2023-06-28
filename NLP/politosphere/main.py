@@ -9,7 +9,7 @@ from peft import get_peft_model, PromptTuningInit, PromptTuningConfig
 from datasets import load_dataset
 
 from src.utils import load_config, train_function
-from src.dataset import SST2Dataset
+from src.dataset import PolitosphereDataset
 
 
 def main():
@@ -23,7 +23,6 @@ def main():
     train_batch_size = int(config["train"]["train_batch_size"])
 
     # Evaluation parameters
-    # eval_devide = config['eval']['device']
     eval_batch_size = int(config["eval"]["eval_batch_size"])
 
     # Model parameters
@@ -44,19 +43,22 @@ def main():
     )
 
     # Dataset parameters
-    dataset_name = config["dataset"]["dataset_name"]
-    task_name = config["dataset"]["task_name"]
+    dataset_path = config["dataset"]["dataset_path"]
+    eval_dataset_path = config["dataset"]["eval_dataset_path"]
+    test_dataset_path = config["dataset"]["test_dataset_path"]
     train_ratio = config["dataset"]["train_ratio"]
 
     # Other parameters
-    checkpoint_name = f"{dataset_name}_{model_name}_{train_ratio}_{num_epochs}".replace(
+    checkpoint_name = f"poli_{model_name}_{train_ratio}_{num_epochs}".replace(
         "/", "_"
     )
     model_dir = os.path.join("res", "models")
     checkpoint_path = os.path.join(model_dir, checkpoint_name)
 
     # Load dataset
-    dataset = load_dataset(dataset_name, task_name)
+    dataset = load_dataset("json", data_files=dataset_path)
+    eval_dataset = load_dataset("json", data_files=eval_dataset_path)
+    test_dataset = load_dataset("json", data_files=test_dataset_path)
 
     # Load model
     model = AutoModelForCausalLM.from_pretrained(model_name)
@@ -70,18 +72,19 @@ def main():
 
     # Preprocess dataset
     print("========Preprocessing dataset========")
-    sst2dataset = SST2Dataset(
+    politodataset = PolitosphereDataset(
         tokenizer,
         max_length,
         dataset,
-        task_name,
+        eval_dataset,
+        test_dataset,
         train_ratio,
         train_batch_size,
         eval_batch_size,
     )
 
     # DataLoaders
-    train_dataloader, eval_dataloader = sst2dataset.get_train_eval_dataloader()
+    train_dataloader, eval_dataloader = politodataset.get_train_eval_dataloader()
     # test_dataloader = sst2dataset.get_test_dataloader()
 
     # Optimizer and lr scheduler

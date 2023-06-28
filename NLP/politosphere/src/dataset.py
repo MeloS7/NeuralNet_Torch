@@ -3,13 +3,14 @@ from torch.utils.data import random_split, DataLoader
 from transformers import default_data_collator
 
 
-class SST2Dataset:
+class PolitosphereDataset:
     def __init__(
         self,
         tokenizer,
         max_length,
         dataset,
-        task_name,
+        eval_dataset,
+        test_dataset,
         train_ratio=0.1,
         train_batch_size=8,
         eval_batch_size=8,
@@ -17,12 +18,13 @@ class SST2Dataset:
         self.tokenizer = tokenizer
         self.max_length = max_length
         self.dataset = dataset
-        self.task_name = task_name
+        self.eval_dataset = eval_dataset
+        self.test_dataset = test_dataset
         self.train_ratio = train_ratio
         self.train_batch_size = int(train_batch_size)
         self.eval_batch_size = eval_batch_size
-        self.text_column = "sentence"
-        self.label_column = "text_label"
+        self.text_column = "body_cleaned"
+        self.label_column = "predicted_community"
 
     def create_text_label(self):
         """Create text_label from label"""
@@ -89,8 +91,10 @@ class SST2Dataset:
         return model_inputs
 
     def get_train_eval_dataloader(self):
-        dataset = self.create_text_label()
-        processed_datasets = dataset.map(
+        # dataset = self.create_text_label()
+        dataset = self.dataset
+        eval_dataset = self.eval_dataset
+        processed_dataset = dataset.map(
             self.preprocess_function,
             batched=True,
             num_proc=1,
@@ -98,8 +102,17 @@ class SST2Dataset:
             load_from_cache_file=False,
             desc="Running tokenizer on dataset",
         )
-        train_dataset = processed_datasets["train"]
-        eval_dataset = processed_datasets["validation"]
+        train_dataset = processed_dataset["train"]
+
+        processed_eval_dataset = eval_dataset.map(
+            self.preprocess_function,
+            batched=True,
+            num_proc=1,
+            remove_columns=dataset["train"].column_names,
+            load_from_cache_file=False,
+            desc="Running tokenizer on dataset",
+        )
+        eval_dataset = processed_eval_dataset["train"]
 
         torch.manual_seed(42)
         train_len = len(train_dataset)
@@ -155,8 +168,9 @@ class SST2Dataset:
         return model_inputs
 
     def get_test_dataloader(self):
-        dataset = self.create_text_label()
-        test_dataset = dataset["validation"].map(
+        # dataset = self.create_text_label()
+        dataset = self.test_dataset
+        test_dataset = dataset["train"].map(
             self.test_preprocess_function,
             batched=True,
             num_proc=1,
