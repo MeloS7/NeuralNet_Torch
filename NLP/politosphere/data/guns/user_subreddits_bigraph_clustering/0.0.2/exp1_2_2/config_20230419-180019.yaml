@@ -1,0 +1,90 @@
+DATALOADER:
+  BALANCED: true
+  BATCH_SIZE_TEST: 16
+  BATCH_SIZE_TRAIN: 8
+  EPOCH_SIZE: -1
+  NUM_WORKERS: 8
+DATASET:
+  NAME: ''
+DATA_PROCESSING:
+  COMMENTS_FILENAMES: []
+  SUBREDDITS: []
+DATA_STATS:
+  FILTER_BY_SCORE: true
+  QUANTILES:
+  - 0.5
+  - 0.75
+  - 0.9
+GRAPH_PROCESSING:
+  CLUSTERING:
+    ALGORITHMS:
+    - louvain
+    - - propagation
+      - true
+      - false
+    - - pagerank
+      - true
+      - false
+    - - diffusion
+      - true
+      - false
+    - - propagation_classification
+      - true
+      - false
+    - - nn
+      - true
+      - false
+    SUBREDDITS_LABELS:
+    - - progun
+      - 0
+    - - guncontrol
+      - 1
+  FORCE_RECOMPUTING_GRAPH: false
+  PLOT_GRAPH:
+    COMPUTE_EMBEDDING: false
+    DISPLAY_EDGES: true
+    DISPLAY_EDGE_WEIGHT: false
+    DISPLAY_NODE_WEIGHT: true
+    EDGE_WIDTH: 0.01
+    FONT_SIZE: 12
+    HEIGHT: 600
+    LABEL: 1
+    LABEL_COLORING_COL: piechart
+    LABEL_COLORING_ROW: hard
+    LOG_WEIGHTS_COLUMNS: false
+    NODE_SIZE_MAX: 20
+    NODE_SIZE_MIN: 1
+    NODE_WIDTH: 0
+    REMOVE_MAIN_EDGES: true
+    SCALE_FACTOR_COL: 5
+    SUBREDDITS_NODE_WEIGHTS: true
+    WIDTH: 400
+  SAVE_GRAPH: true
+LOGGING_LEVEL: 20
+MLFLOW:
+  EXP_NAME: reddit_politosphere_bibartite_graph
+  RUN_NAME: run0
+  RUN_UUID: ''
+MODEL:
+  CHECKPOINT_FILENAME: ''
+  DEVICE: cuda
+  NAME: bert-base-uncased
+SOLVER:
+  BETAS:
+  - 0.9
+  - 0.999
+  EPS: 1.0e-08
+  GRADIENT_ACCUMULATION_STEPS: 1
+  LR: 5.0e-05
+  NUM_CYCLES: 0.5
+  OPTIMIZER_NAME: adamw
+  SCHEDULER_NAME: linear
+  WARMUP: false
+  WARMUP_NUM_STEPS: 100
+  WEIGHT_DECAY: 0.0005
+TRAIN:
+  EARLY_STOPPING: true
+  EARLY_STOPPING_PATIENCE: 5
+  LOG_EVERY_ITERS: 100
+  MAX_EPOCHS: 20
+  N_SAVED: 3

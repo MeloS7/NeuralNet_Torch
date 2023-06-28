@@ -1,0 +1,84 @@
+2023-04-24 10:16:12,814 reddit_politosphere_user_analysis INFO: Bipartite graph processing
+2023-04-24 10:16:12,815 reddit_politosphere_user_analysis INFO: DATALOADER:
+  BALANCED: True
+  BATCH_SIZE_TEST: 16
+  BATCH_SIZE_TRAIN: 8
+  EPOCH_SIZE: -1
+  NUM_WORKERS: 8
+DATASET:
+  NAME: 
+DATA_PROCESSING:
+  COMMENTS_FILENAMES: []
+  SUBREDDITS: []
+DATA_STATS:
+  FILTER_BY_SCORE: True
+  QUANTILES: [0.5, 0.75, 0.9]
+GRAPH_PROCESSING:
+  CLUSTERING:
+    ALGORITHMS: ['louvain']
+    SUBREDDITS_LABELS: []
+  FORCE_RECOMPUTING_GRAPH: False
+  PLOT_GRAPH:
+    COMPUTE_EMBEDDING: False
+    DISPLAY_EDGES: True
+    DISPLAY_EDGE_WEIGHT: False
+    DISPLAY_NODE_WEIGHT: True
+    EDGE_WIDTH: 0.01
+    FONT_SIZE: 12
+    HEIGHT: 600
+    LABEL: 1
+    LABEL_COLORING_COL: piechart
+    LABEL_COLORING_ROW: hard
+    LOG_WEIGHTS_COLUMNS: False
+    NODE_SIZE_MAX: 20
+    NODE_SIZE_MIN: 1
+    NODE_WIDTH: 0
+    REMOVE_MAIN_EDGES: False
+    SCALE_FACTOR_COL: 5
+    SUBREDDITS_NODE_WEIGHTS: True
+    WIDTH: 400
+  SAVE_GRAPH: True
+LOGGING_LEVEL: 20
+MLFLOW:
+  EXP_NAME: reddit_politosphere_user_analysis
+  RUN_NAME: run0
+  RUN_UUID: 
+MODEL:
+  CHECKPOINT_FILENAME: 
+  DEVICE: cuda
+  NAME: bert-base-uncased
+SOLVER:
+  BETAS: (0.9, 0.999)
+  EPS: 1e-08
+  GRADIENT_ACCUMULATION_STEPS: 1
+  LR: 5e-05
+  NUM_CYCLES: 0.5
+  OPTIMIZER_NAME: adamw
+  SCHEDULER_NAME: linear
+  WARMUP: False
+  WARMUP_NUM_STEPS: 100
+  WEIGHT_DECAY: 0.0005
+TRAIN:
+  EARLY_STOPPING: True
+  EARLY_STOPPING_PATIENCE: 5
+  LOG_EVERY_ITERS: 100
+  MAX_EPOCHS: 20
+  N_SAVED: 3
+USER_ANALYSIS:
+  COMMUNITY_SUBREDDITS: ['progun']
+  NORMALIZE: True
+2023-04-24 10:16:36,199 reddit_politosphere_user_analysis INFO: Mean subreddit score vector: [0.77 0.11 0.03 0.   0.07 0.01 0.   0.  ]
+2023-04-24 10:16:47,873 reddit_politosphere_user_analysis INFO: 10 users most similar to the subreddits:
+           0     1     2    3     4    5    6    7  subreddits_similarity  polarisation
+Izthw  0.78  0.16  0.00  0.0  0.06  0.0  0.0  0.0                   1.00          0.52
+031Gn  0.84  0.11  0.05  0.0  0.00  0.0  0.0  0.0                   1.00          0.55
+ci1dW  0.75  0.18  0.00  0.0  0.07  0.0  0.0  0.0                   0.99          0.52
+RddJF  0.88  0.12  0.00  0.0  0.00  0.0  0.0  0.0                   0.99          0.56
+Wwxpb  0.87  0.13  0.00  0.0  0.00  0.0  0.0  0.0                   0.99          0.56
+2023-04-24 10:16:47,890 reddit_politosphere_user_analysis INFO: 10 lowest polarized users:
+           0     1     2     3     4     5     6    7  subreddits_similarity  polarisation
+hLRsa  0.12  0.12  0.25  0.13  0.18  0.19  0.00  0.0                   0.40          0.17
+LzKp7  0.12  0.20  0.14  0.04  0.27  0.20  0.04  0.0                   0.41          0.18
+Xyi2P  0.14  0.18  0.25  0.07  0.18  0.18  0.00  0.0                   0.46          0.19
+J2id5  0.11  0.22  0.24  0.00  0.22  0.21  0.00  0.0                   0.37          0.19
+fHtgK  0.11  0.21  0.24  0.00  0.24  0.20  0.00  0.0                   0.39          0.20

@@ -1,0 +1,93 @@
+2023-05-03 16:59:16,744 reddit_politosphere_supervised_creation INFO: Create supervised dataset
+2023-05-03 16:59:16,744 reddit_politosphere_supervised_creation INFO: DATALOADER:
+  BALANCED: True
+  BATCH_SIZE_TEST: 16
+  BATCH_SIZE_TRAIN: 8
+  EPOCH_SIZE: -1
+  NUM_WORKERS: 8
+DATASET:
+  NAME: 
+DATA_PROCESSING:
+  COMMENTS_FILENAMES: []
+  SUBREDDITS: []
+DATA_STATS:
+  FILTER_BY_SCORE: True
+  QUANTILES: [0.5, 0.75, 0.9]
+GRAPH_PROCESSING:
+  CLUSTERING:
+    ALGORITHMS: ['louvain']
+    SUBREDDITS_LABELS: []
+  FORCE_RECOMPUTING_GRAPH: False
+  PLOT_GRAPH:
+    COMPUTE_EMBEDDING: False
+    DISPLAY_EDGES: True
+    DISPLAY_EDGE_WEIGHT: False
+    DISPLAY_NODE_WEIGHT: True
+    EDGE_WIDTH: 0.01
+    FONT_SIZE: 12
+    HEIGHT: 600
+    LABEL: 1
+    LABEL_COLORING_COL: piechart
+    LABEL_COLORING_ROW: hard
+    LOG_WEIGHTS_COLUMNS: False
+    NODE_SIZE_MAX: 20
+    NODE_SIZE_MIN: 1
+    NODE_WIDTH: 0
+    REMOVE_MAIN_EDGES: False
+    SCALE_FACTOR_COL: 5
+    SUBREDDITS_NODE_WEIGHTS: True
+    WIDTH: 400
+  SAVE_GRAPH: True
+LOGGING_LEVEL: 20
+MLFLOW:
+  EXP_NAME: reddit_politosphere_supervised_creation
+  RUN_NAME: run0
+  RUN_UUID: 
+MODEL:
+  CHECKPOINT_FILENAME: 
+  DEVICE: cuda
+  NAME: bert-base-uncased
+SOLVER:
+  BETAS: (0.9, 0.999)
+  EPS: 1e-08
+  GRADIENT_ACCUMULATION_STEPS: 1
+  LR: 5e-05
+  NUM_CYCLES: 0.5
+  OPTIMIZER_NAME: adamw
+  SCHEDULER_NAME: linear
+  WARMUP: False
+  WARMUP_NUM_STEPS: 100
+  WEIGHT_DECAY: 0.0005
+SUPERVISED_CREATION:
+  COMMUNITIES: [0, 2, 3]
+  NORMALIZE: True
+  POLARISATION_THRESHOLD: -1
+  POLARISED_TRAIN_TEST_SPLIT: 0.9
+  RANDOM_SEED: 42
+  TRAIN_USER_SIZE: 1400
+  VAL_USER_SIZE: 280
+TRAIN:
+  EARLY_STOPPING: True
+  EARLY_STOPPING_PATIENCE: 5
+  LOG_EVERY_ITERS: 100
+  MAX_EPOCHS: 20
+  N_SAVED: 3
+USER_ANALYSIS:
+  COMMUNITY_SUBREDDITS: []
+  NORMALIZE: True
+2023-05-03 16:59:16,901 reddit_politosphere_supervised_creation INFO: Number of total number of users: 31869
+2023-05-03 16:59:16,969 reddit_politosphere_supervised_creation INFO: Number of users whose argmax score is in the communities: 23081
+2023-05-03 16:59:16,974 reddit_politosphere_supervised_creation INFO: Train users per community: 519
+2023-05-03 16:59:16,974 reddit_politosphere_supervised_creation INFO: Community 0
+2023-05-03 16:59:16,990 reddit_politosphere_supervised_creation INFO: Number of polarized users in community 0: 519
+2023-05-03 16:59:16,991 reddit_politosphere_supervised_creation INFO: Number of train polarized users in community 0: 467
+2023-05-03 16:59:16,999 reddit_politosphere_supervised_creation INFO: Number of val polarized users in community 0: 519
+2023-05-03 16:59:17,000 reddit_politosphere_supervised_creation INFO: Community 2
+2023-05-03 16:59:17,008 reddit_politosphere_supervised_creation INFO: Number of polarized users in community 2: 519
+2023-05-03 16:59:17,009 reddit_politosphere_supervised_creation INFO: Number of train polarized users in community 2: 467
+2023-05-03 16:59:17,017 reddit_politosphere_supervised_creation INFO: Number of val polarized users in community 2: 519
+2023-05-03 16:59:17,018 reddit_politosphere_supervised_creation INFO: Community 3
+2023-05-03 16:59:17,025 reddit_politosphere_supervised_creation INFO: Number of polarized users in community 3: 519
+2023-05-03 16:59:17,025 reddit_politosphere_supervised_creation INFO: Number of train polarized users in community 3: 467
+2023-05-03 16:59:17,034 reddit_politosphere_supervised_creation INFO: Number of val polarized users in community 3: 519
+2023-05-03 16:59:17,065 reddit_politosphere_supervised_creation INFO: Number of val users: 280
