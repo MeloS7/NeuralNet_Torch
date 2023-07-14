@@ -42,7 +42,7 @@ class PolitosphereDataset:
 
         # Embed the labels into the prompt
         inputs = [
-            f"{self.text_column} : {x} Label : " for x in examples[self.text_column]
+            f"{self.text_column} : {x} Subreddit : " for x in examples[self.text_column]
         ]
         targets = [str(x) for x in examples[self.label_column]]
 
@@ -143,7 +143,7 @@ class PolitosphereDataset:
         """Preprocess function for test dataset"""
         batch_size = len(examples[self.text_column])
         inputs = [
-            f"{self.text_column} : {x} Label : " for x in examples[self.text_column]
+            f"{self.text_column} : {x} Subreddit : " for x in examples[self.text_column]
         ]
         model_inputs = self.tokenizer(inputs)
         targets = [str(x) for x in examples[self.label_column]]
@@ -169,7 +169,7 @@ class PolitosphereDataset:
 
     def get_test_dataloader(self):
         # dataset = self.create_text_label()
-        dataset = self.dataset
+        dataset = self.test_dataset
         test_dataset = dataset["train"].map(
             self.test_preprocess_function,
             batched=True,

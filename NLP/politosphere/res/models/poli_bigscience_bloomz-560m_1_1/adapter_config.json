@@ -4,10 +4,10 @@
   "num_attention_heads": 16,
   "num_layers": 24,
   "num_transformer_submodules": 1,
-  "num_virtual_tokens": 8,
+  "num_virtual_tokens": 15,
   "peft_type": "PROMPT_TUNING",
   "prompt_tuning_init": "TEXT",
-  "prompt_tuning_init_text": "Classify if the sentence is positive or negative:",
+  "prompt_tuning_init_text": "Classify if the predicted subreddit of this sentence is 0, 2 or 3:",
   "task_type": "CAUSAL_LM",
   "token_dim": 1024,
   "tokenizer_name_or_path": "bigscience/bloomz-560m"

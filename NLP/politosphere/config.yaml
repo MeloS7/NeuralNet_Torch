@@ -17,8 +17,8 @@ model:
 
 peft:
   task_type: "CAUSAL_LM"
-  num_virtual_tokens: 8
-  prompt_init_text: "Classify if the sentence is positive or negative:"
+  num_virtual_tokens: 15
+  prompt_init_text: "Classify if the predicted subreddit of this sentence is 0, 2 or 3:"
 
 dataset:
   dataset_path: "./data/guns/supervised_dataset/0.0.6/exp1_2_2_6/comments_guns_with_scores_above_quantile_0.90_train_64.json"
