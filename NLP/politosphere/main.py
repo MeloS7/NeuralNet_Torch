@@ -49,7 +49,7 @@ def main():
     train_ratio = config["dataset"]["train_ratio"]
 
     # Other parameters
-    checkpoint_name = f"poli_{model_name}_{train_ratio}_{num_epochs}".replace(
+    checkpoint_name = f"poli_sum_balanced_{model_name}_{train_ratio}_{num_epochs}".replace(
         "/", "_"
     )
     model_dir = os.path.join("res", "models")

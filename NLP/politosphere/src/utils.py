@@ -76,14 +76,20 @@ def evaluate_function(model, device, test_dataloader, tokenizer):
 
         with torch.no_grad():
             outputs = model.generate(
-                input_ids=batch["input_ids"], attention_mask=batch["attention_mask"], max_new_tokens=10, eos_token_id=3
+                input_ids=batch["input_ids"], attention_mask=batch["attention_mask"], max_new_tokens=1, eos_token_id=3
             )
-        
-        # print(tokenizer.batch_decode(outputs[:, -2:-1]))
-        # print(tokenizer.batch_decode(batch["labels"]))
-        # assert 1==2
+        # print(tokenizer.batch_decode(outputs[:, -10:-1]))
+        print(tokenizer.batch_decode(outputs[:, -1]))
+        print(tokenizer.batch_decode(batch["labels"]))
 
-        test_preds.extend(tokenizer.batch_decode(outputs[:, -2:-1]))
+        ### For test if there are invalid characters
+        # decoded_outputs = tokenizer.batch_decode(outputs[:, -1])
+        # allowed_chars = ['0', '2', '3']
+        # invalid_chars = [char for char in decoded_outputs if char not in allowed_chars]
+        # assert 1==2
+        # assert len(invalid_chars) == 0, f"Invalid characters found: {tokenizer.batch_decode(outputs)}"
+
+        test_preds.extend(tokenizer.batch_decode(outputs[:, -1]))
         labels.extend(tokenizer.batch_decode(batch["labels"]))
 
     return test_preds, labels
