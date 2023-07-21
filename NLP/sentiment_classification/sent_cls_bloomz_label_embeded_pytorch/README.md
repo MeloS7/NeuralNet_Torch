@@ -1,2 +1,9 @@
-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
-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
+| Ratio of training dataset | Epoch | Result(Accuracy) |
+| --- | --- | --- |
+| 0.01 | 1 | 0.040 |
+| 0.03 | 1 | 0.0 |
+| 0.05 | 1 | 0.778 |
+| 0.1 | 1 | 0.921 |
+| 0.2 | 1 | 0.906 |
+| 0.5 | 1 | 0.931 |
+| 1 | 1 | 0.931 |
